@@ -1,39 +1,55 @@
-import { StyleSheet, View, TextInput } from "react-native";
+import { StyleSheet, View, TextInput, Alert } from "react-native";
 import { useState } from "react";
 import PrimaryButton from "../components/PrimaryButton";
 
-const StartGameScreen = (props) => {
-  const [input, setInput] = useState("");
-  const changeInputHandler = (i) => {
-    setInput(i);
+const StartGameScreen = ({ onPickNumber }) => {
+  const [enteredNumber, setEnteredNumber] = useState("");
+  const numberInputHandler = (enteredText) => {
+    setEnteredNumber(enteredText);
   };
-  const confirmHandler = () => {
-    if (input.length === 0) {
+  const confirmInputHandler = () => {
+    if (enteredNumber.length === 0) {
+      Alert.alert("Invalid input", "Empty input is rejected!", [
+        { text: "okay", onPress: resetInputHandler },
+      ]);
       return;
     }
-    console.log(input);
+
+    if (
+      isNaN(parseInt(enteredNumber)) ||
+      enteredNumber <= 0 ||
+      enteredNumber > 99
+    ) {
+      Alert.alert(
+        "Invalid number",
+        "Number has to be a number between 1 and 99",
+        [{ text: "okay", onPress: resetInputHandler }]
+      );
+      return;
+    }
+    onPickNumber(enteredNumber);
   };
-  const resetHandler = () => {
-    setInput("");
+  const resetInputHandler = () => {
+    setEnteredNumber("");
   };
 
   return (
     <View style={styles.inputContainer}>
       <TextInput
-        onChangeText={changeInputHandler}
+        onChangeText={numberInputHandler}
         style={styles.numberInput}
         maxLength={2}
         keyboardType="number-pad"
         autoCapitalize="none"
         autoCorrect={false}
-        value={input}
+        value={enteredNumber}
       />
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonContainer}>
-          <PrimaryButton onPress={confirmHandler}>Confirm</PrimaryButton>
+          <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
         </View>
         <View style={styles.buttonContainer}>
-          <PrimaryButton onPress={resetHandler}>Reset</PrimaryButton>
+          <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
         </View>
       </View>
     </View>
