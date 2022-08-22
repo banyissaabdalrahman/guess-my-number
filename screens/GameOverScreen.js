@@ -1,7 +1,7 @@
-import { StyleSheet } from "react-native";
+import { Text } from "react-native";
 
-const GameOverScreen = (props) => {};
+function GameOverScreen() {
+  return <Text>Game Over</Text>;
+}
 
 export default GameOverScreen;
-
-const styles = StyleSheet.create({});

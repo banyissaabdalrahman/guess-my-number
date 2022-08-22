@@ -1,6 +1,6 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import Colors from "../../constants/Colors";
-const PrimaryButton = (props) => {
+function PrimaryButton(props) {
   return (
     <View style={style.buttonOutterContainer}>
       <Pressable
@@ -16,7 +16,7 @@ const PrimaryButton = (props) => {
       </Pressable>
     </View>
   );
-};
+}
 
 export default PrimaryButton;
 

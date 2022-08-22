@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { StyleSheet, View, Text, Alert } from "react-native";
+
 import Title from "../components/ui/Title";
 import NumberContainer from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
-const generateRandomBetween = (min, max, exclude) => {
+
+function generateRandomBetween(min, max, exclude) {
   const rndNum = Math.floor(Math.random() * (max - min)) + min;
 
   if (rndNum === exclude) {
@@ -11,22 +13,26 @@ const generateRandomBetween = (min, max, exclude) => {
   } else {
     return rndNum;
   }
-};
+}
 
 let minBoundary = 1;
 let maxBoundary = 100;
 
-const GameScreen = ({ userNumber }) => {
-  const initalGuess = generateRandomBetween(
-    minBoundary,
-    maxBoundary,
-    userNumber
-  );
+function GameScreen({ userNumber, onGameOver }) {
+  const initalGuess = generateRandomBetween(1, 100, userNumber);
+
   const [currentGuess, setCurrentGuess] = useState(initalGuess);
+
+  useEffect(() => {
+    if (currentGuess === userNumber) {
+      onGameOver();
+    }
+  }, [currentGuess, userNumber, onGameOver]);
+
   function nextGuessHandler(direction) {
     if (
-      (direction === "lower" && userNumber > currentGuess) ||
-      (direction === "greater" && userNumber < currentGuess)
+      (direction === "lower" && currentGuess < userNumber) ||
+      (direction === "greater" && currentGuess > userNumber)
     ) {
       Alert.alert(`Don't lie!`, `You know that this is wrong`, [
         {
@@ -70,7 +76,7 @@ const GameScreen = ({ userNumber }) => {
       <View>{/* LOG ROUNDS */}</View>
     </View>
   );
-};
+}
 
 export default GameScreen;
 
