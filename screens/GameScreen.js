@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
-import { StyleSheet, View, Text, Alert } from "react-native";
+import { StyleSheet, View, Alert } from "react-native";
 
 import Title from "../components/ui/Title";
 import NumberContainer from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import Card from "../components/ui/Card";
-import GeneralStyles from "../constants/GeneralStyles";
+import ButtonsStyles from "../constants/ButtonsStyles";
 import InstructionText from "../components/ui/InstructionText";
+
+import { Ionicons } from "@expo/vector-icons";
 
 function generateRandomBetween(min, max, exclude) {
   const rndNum = Math.floor(Math.random() * (max - min)) + min;
@@ -53,8 +55,6 @@ function GameScreen({ userNumber, onGameOver }) {
       minBoundary = currentGuess + 1;
     }
 
-    console.log(`${minBoundary} ${maxBoundary}`);
-
     const newGuess = generateRandomBetween(
       minBoundary,
       maxBoundary,
@@ -69,15 +69,15 @@ function GameScreen({ userNumber, onGameOver }) {
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card>
         <InstructionText>Higher or lower?</InstructionText>
-        <View style={GeneralStyles.buttonsContainer}>
-          <View style={GeneralStyles.buttonContainer}>
+        <View style={ButtonsStyles.buttonsContainer}>
+          <View style={ButtonsStyles.buttonContainer}>
             <PrimaryButton onPress={nextGuessHandler.bind(this, "greater")}>
-              +
+              <Ionicons name="md-add" size={24} color="#fff" />
             </PrimaryButton>
           </View>
-          <View style={GeneralStyles.buttonContainer}>
+          <View style={ButtonsStyles.buttonContainer}>
             <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
-              -
+              <Ionicons name="md-remove" size={24} color="#fff" />
             </PrimaryButton>
           </View>
         </View>

@@ -1,4 +1,4 @@
-export default GeneralStyles = {
+export default ButtonsStyles = {
   buttonsContainer: {
     flexDirection: "row",
   },

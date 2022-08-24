@@ -5,7 +5,7 @@ import PrimaryButton from "../components/ui/PrimaryButton";
 import Colors from "../constants/Colors";
 import Title from "../components/ui/Title";
 import Card from "../components/ui/Card";
-import GeneralStyles from "../constants/GeneralStyles";
+import ButtonsStyles from "../constants/ButtonsStyles";
 import InstructionText from "../components/ui/InstructionText";
 
 function StartGameScreen({ onPickNumber }) {
@@ -54,11 +54,11 @@ function StartGameScreen({ onPickNumber }) {
           autoCorrect={false}
           value={enteredNumber}
         />
-        <View style={GeneralStyles.buttonsContainer}>
-          <View style={GeneralStyles.buttonContainer}>
+        <View style={ButtonsStyles.buttonsContainer}>
+          <View style={ButtonsStyles.buttonContainer}>
             <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
           </View>
-          <View style={GeneralStyles.buttonContainer}>
+          <View style={ButtonsStyles.buttonContainer}>
             <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
           </View>
         </View>
