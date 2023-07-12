@@ -1,4 +1,4 @@
-export default ButtonsStyles = {
+const ButtonsStyles = {
   buttonsContainer: {
     flexDirection: "row",
   },
@@ -6,3 +6,5 @@ export default ButtonsStyles = {
     flex: 1,
   },
 };
+
+export default ButtonsStyles;
