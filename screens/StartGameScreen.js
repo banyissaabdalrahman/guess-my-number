@@ -53,32 +53,32 @@ function StartGameScreen({ onPickNumber }) {
 
   return (
     <ScrollView style={styles.screen}>
-      <KeyboardAvoidingView
-        style={[styles.rootContainer, { marginTop: marginTopDistance }]}
-      >
-        <Title>Guess My Number</Title>
-        <Card>
-          <InstructionText>Enter a number</InstructionText>
-          <TextInput
-            onChangeText={numberInputHandler}
-            style={styles.numberInput}
-            maxLength={2}
-            keyboardType="number-pad"
-            autoCapitalize="none"
-            autoCorrect={false}
-            value={enteredNumber}
-          />
-          <View style={ButtonsStyles.buttonsContainer}>
-            <View style={ButtonsStyles.buttonContainer}>
-              <PrimaryButton onPress={confirmInputHandler}>
-                Confirm
-              </PrimaryButton>
+      <KeyboardAvoidingView style={styles.screen} behavior="position">
+        <View style={[styles.rootContainer, { marginTop: marginTopDistance }]}>
+          <Title>Guess My Number</Title>
+          <Card>
+            <InstructionText>Enter a number</InstructionText>
+            <TextInput
+              onChangeText={numberInputHandler}
+              style={styles.numberInput}
+              maxLength={2}
+              keyboardType="number-pad"
+              autoCapitalize="none"
+              autoCorrect={false}
+              value={enteredNumber}
+            />
+            <View style={ButtonsStyles.buttonsContainer}>
+              <View style={ButtonsStyles.buttonContainer}>
+                <PrimaryButton onPress={confirmInputHandler}>
+                  Confirm
+                </PrimaryButton>
+              </View>
+              <View style={ButtonsStyles.buttonContainer}>
+                <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
+              </View>
             </View>
-            <View style={ButtonsStyles.buttonContainer}>
-              <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
-            </View>
-          </View>
-        </Card>
+          </Card>
+        </View>
       </KeyboardAvoidingView>
     </ScrollView>
   );
