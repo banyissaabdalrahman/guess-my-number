@@ -5,6 +5,7 @@ import {
   Text,
   Dimensions,
   useWindowDimensions,
+  ScrollView,
 } from "react-native";
 
 import Title from "../components/ui/Title";
@@ -31,22 +32,26 @@ function GameOverScreen({ rounds, number, onStartNewGame }) {
     borderRadius: imageSize / 2,
   };
   return (
-    <View style={[styles.gameOverContainer, { marginTop: marginTopDistance }]}>
-      <Title>Game Over!</Title>
-      <View style={[styles.imageContainer, imageStyle]}>
-        <Image
-          style={styles.image}
-          source={require("../assets/images/success.png")}
-        />
+    <ScrollView style={styles.screen}>
+      <View
+        style={[styles.gameOverContainer, { marginTop: marginTopDistance }]}
+      >
+        <Title>Game Over!</Title>
+        <View style={[styles.imageContainer, imageStyle]}>
+          <Image
+            style={styles.image}
+            source={require("../assets/images/success.png")}
+          />
+        </View>
+        <Text style={styles.summaryText}>
+          Your phone needed <Text style={styles.highlight}>{rounds}</Text>{" "}
+          rounds to guess <Text style={styles.highlight}>{number}</Text> .
+        </Text>
+        <View style={ButtonsStyles.buttonContainer}>
+          <PrimaryButton onPress={onStartNewGame}>Start new game</PrimaryButton>
+        </View>
       </View>
-      <Text style={styles.summaryText}>
-        Your phone needed <Text style={styles.highlight}>{rounds}</Text> rounds
-        to guess <Text style={styles.highlight}>{number}</Text> .
-      </Text>
-      <View style={ButtonsStyles.buttonContainer}>
-        <PrimaryButton onPress={onStartNewGame}>Start new game</PrimaryButton>
-      </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -55,6 +60,9 @@ export default GameOverScreen;
 const deviceWidth = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+  },
   gameOverContainer: {
     flex: 1,
     padding: 24,
